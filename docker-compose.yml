@@ -28,10 +28,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.caddy
+    container_name: nyttetech
     restart: unless-stopped
-    ports:
-      - "8080:80"
+    expose:
+      - "80"
+    networks:
+      - default
+      - web
     depends_on:
       - frontend
       - backend
       - game
+
+networks:
+  web:
+    external: true
